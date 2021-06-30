@@ -32,6 +32,8 @@
                 <group string="Warn From" attrs="{'invisible': [('use_dgii_control', '!=', True)]}">
                     <field name="remaining_numbers" attrs="{'required': [('use_dgii_control', '=', True)]}"/>
                     <field name="remaining_days" attrs="{'required': [('use_dgii_control', '=', True)]}"/>
+                    
+
                 </group>
             </xpath>
 
@@ -40,6 +42,7 @@
                 <field name="prefix" readonly="1"/>
                 <field name="resolution_number" attrs="{'required': [('use_dgii_control', '=', True)]}"/>
                 <field name="serial_document" attrs="{'required': [('use_dgii_control', '=', True)]}"/>
+
             </field>
 
             <field name="date_to" position="after">
