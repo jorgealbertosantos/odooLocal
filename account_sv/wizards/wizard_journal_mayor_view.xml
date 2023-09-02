@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="wizard_journal_mayor_form_view">
+        <field name="name">wizard journal mayor form view</field>
+        <field name="model">journal.mayor.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Diario Mayor">
+                <p>Marque estas Opcion si desea visualizarlas.</p>
+                <group>
+                    <group col="2">
+                      <field name="date_stop"/>
+                      <field name="mes"/>
+                    </group>
+                    <group col="2">
+                      <h2 class="oe_highlight">
+                        Recuerde que para imprimir el informe del diario mayor <b />
+                        debe haber validado todos los asientos contables.
+                      </h2>
+                    </group>
+                </group>
+                <footer>
+                  <button name="print_report" type="object"
+                      string="Imprimir" class="oe_highlight"/>
+                  or
+                  <button special="cancel" string="Cancelar"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <act_window id="action_journal_mayor_chart"
+          name="Diario Mayor"
+          res_model="journal.mayor.wizard"
+          view_mode="form"
+          target="new"
+          key2="client_action_multi"/>
+    
+    <menuitem id="menu_journal_mayor_chart"
+          sequence="1"
+          name="Diario Mayor"
+          parent="account_reports.account_reports_audit_reports_menu"
+          groups="account.group_account_manager"
+          action="action_journal_mayor_chart"/>
+  </data>
+</odoo>
