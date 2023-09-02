@@ -1,0 +1,59 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* l10n_sv_account_journal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-06-21 23:46+0000\n"
+"PO-Revision-Date: 2021-06-21 23:46+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_sv_account_journal
+#: model:ir.model.fields,field_description:l10n_sv_account_journal.field_account_bank_statement_import_journal_creation__class_document
+#: model:ir.model.fields,field_description:l10n_sv_account_journal.field_account_journal__class_document
+msgid "Class Document"
+msgstr "Clase de Documento"
+
+#. module: l10n_sv_account_journal
+#: selection:account.journal,type_document:0
+msgid "Credit Note"
+msgstr "NOTA CREDITO"
+
+#. module: l10n_sv_account_journal
+#: selection:account.journal,type_document:0
+msgid "Debit Note"
+msgstr "NOTA DEBITO"
+
+#. module: l10n_sv_account_journal
+#: model:ir.model,name:l10n_sv_account_journal.model_account_journal
+msgid "Journal"
+msgstr "Diario"
+
+#. module: l10n_sv_account_journal
+#: selection:account.journal,class_document:0
+msgid "PRINTED BY PRINTER OR TICKETS"
+msgstr "IMPRESO POR IMPRENTA O TIQUETES"
+
+#. module: l10n_sv_account_journal
+#: selection:account.journal,class_document:0
+msgid "SINGLE FORM"
+msgstr "FORMULARIO UNICO"
+
+#. module: l10n_sv_account_journal
+#: selection:account.journal,type_document:0
+msgid "Tax Credit Voucher"
+msgstr "COMPROVANTE DE CREDITO FISCAL"
+
+#. module: l10n_sv_account_journal
+#: model:ir.model.fields,field_description:l10n_sv_account_journal.field_account_bank_statement_import_journal_creation__type_document
+#: model:ir.model.fields,field_description:l10n_sv_account_journal.field_account_journal__type_document
+msgid "Type Document"
+msgstr "Tipo de Comprovante"
+
