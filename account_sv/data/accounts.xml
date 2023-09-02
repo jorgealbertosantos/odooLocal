@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data noupdate="1">
+    <!-- Cuentas de Primer Nivel -->
+    <record id="1" model="account.views">
+      <field name="code">1</field>
+      <field name="sequence">100</field>
+      <field name="parent_id"></field>
+      <field name="name">ACTIVOS</field>
+      <field name="mayor" eval="True"/>
+    </record>
+    <record id="2" model="account.views">
+      <field name="code">2</field>
+      <field name="sequence">200</field>
+      <field name="parent_id"></field>
+      <field name="name">PASIVOS</field>
+      <field name="mayor" eval="True"/>
+    </record>
+    <record id="3" model="account.views">
+      <field name="code">3</field>
+      <field name="sequence">300</field>
+      <field name="parent_id"></field>
+      <field name="name">CAPITAL</field>
+      <field name="mayor" eval="True"/>
+    </record>
+    <record id="4" model="account.views">
+      <field name="code">4</field>
+      <field name="sequence">400</field>
+      <field name="parent_id"></field>
+      <field name="name">COSTOS Y GASTOS</field>
+      <field name="mayor" eval="True"/>
+    </record>
+    <record id="5" model="account.views">
+      <field name="code">5</field>
+      <field name="sequence">500</field>
+      <field name="parent_id"></field>
+      <field name="name">INGRESOS</field>
+      <field name="mayor" eval="True"/>
+    </record>
+    <!-- Cuentas de Segundo Nivel -->
+    <record id="11" model="account.views">
+      <field name="code">11</field>
+      <field name="sequence">110</field>
+      <field name="parent_id" ref="1" />
+      <field name="name">CORRIENTE</field>
+      <field name="mayor" eval="True"/>
+    </record>    
+    <record id="12" model="account.views">
+      <field name="code">12</field>
+      <field name="sequence">120</field>
+      <field name="parent_id" ref="1" />
+      <field name="name">NO CORRIENTE</field>
+      <field name="mayor" eval="True"/>
+    </record>    
+    <record id="21" model="account.views">
+      <field name="code">21</field>
+      <field name="sequence">210</field>
+      <field name="parent_id" ref="2" />
+      <field name="name">CORRIENTE</field>
+      <field name="mayor" eval="True"/>
+    </record>    
+    <record id="22" model="account.views">
+      <field name="code">22</field>
+      <field name="sequence">220</field>
+      <field name="parent_id" ref="2" />
+      <field name="name">CORRIENTE</field>
+      <field name="mayor" eval="True"/>
+    </record>    
+    <record id="31" model="account.views">
+      <field name="code">31</field>
+      <field name="sequence">310</field>
+      <field name="parent_id" ref="3" />
+      <field name="name">CAPITAL CONTABLE</field>
+      <field name="mayor" eval="True"/>
+    </record>    
+    <record id="41" model="account.views">
+      <field name="code">41</field>
+      <field name="sequence">410</field>
+      <field name="parent_id" ref="4" />
+      <field name="name">COSTOS DE OPERACION</field>
+      <field name="mayor" eval="True"/>
+    </record>
+    <record id="42" model="account.views">
+      <field name="code">42</field>
+      <field name="sequence">420</field>
+      <field name="parent_id" ref="4" />
+      <field name="name">COSTOS NO OPERACIONALES</field>
+      <field name="mayor" eval="True"/>
+    </record>
+    <record id="43" model="account.views">
+      <field name="code">43</field>
+      <field name="sequence">430</field>
+      <field name="parent_id" ref="4" />
+      <field name="name">GASTOS DE VENTA</field>
+      <field name="mayor" eval="True"/>
+    </record>
+    <record id="44" model="account.views">
+      <field name="code">44</field>
+      <field name="sequence">440</field>
+      <field name="parent_id" ref="4" />
+      <field name="name">GASTOS NO OPERACIONALES</field>
+      <field name="mayor" eval="True"/>
+    </record>
+    <record id="51" model="account.views">
+      <field name="code">51</field>
+      <field name="sequence">510</field>
+      <field name="parent_id" ref="5" />
+      <field name="name">INGRESOS DE OPERACION</field>
+      <field name="mayor" eval="True"/>
+    </record>
+    <record id="52" model="account.views">
+      <field name="code">52</field>
+      <field name="sequence">520</field>
+      <field name="parent_id" ref="5" />
+      <field name="name">INGRESOS NO OPERACIONALES</field>
+      <field name="mayor" eval="True"/>
+    </record>
+    <!-- Cuentas de Tercer Nivel -->
+    <record id="111" model="account.views">
+      <field name="code">111</field>
+      <field name="sequence">111</field>
+      <field name="parent_id" ref="11" />
+      <field name="name">EFECTIVOS Y EQUIVALENTES DE EFECTIVO</field>
+      <field name="mayor" eval="True"/>
+    </record>
+    <record id="112" model="account.views">
+      <field name="code">112</field>
+      <field name="sequence">112</field>
+      <field name="parent_id" ref="11" />
+      <field name="name">CUENTAS Y DOCUMENTOS POR COBRAR</field>
+      <field name="mayor" eval="True"/>
+    </record>
+    <record id="113" model="account.views">
+      <field name="code">113</field>
+      <field name="sequence">113</field>
+      <field name="parent_id" ref="11" />
+      <field name="name">INVENTARIOS</field>
+      <field name="mayor" eval="True"/>
+    </record>
+    <record id="114" model="account.views">
+      <field name="code">114</field>
+      <field name="sequence">114</field>
+      <field name="parent_id" ref="11" />
+      <field name="name">CARGOS DIFERIDOS CORTO PLAZO</field>
+      <field name="mayor" eval="True"/>
+    </record>
+    <record id="121" model="account.views">
+      <field name="code">121</field>
+      <field name="sequence">121</field>
+      <field name="parent_id" ref="12" />
+      <field name="name">PROPIEDADES, PLANTA Y EQUIPO</field>
+      <field name="mayor" eval="True"/>
+    </record>
+    <record id="122" model="account.views">
+      <field name="code">122</field>
+      <field name="sequence">122</field>
+      <field name="parent_id" ref="12" />
+      <field name="name">PROPIEDADES DE INVERSION</field>
+      <field name="mayor" eval="True"/>
+    </record>
+    <record id="123" model="account.views">
+      <field name="code">123</field>
+      <field name="sequence">123</field>
+      <field name="parent_id" ref="12" />
+      <field name="name">PROPIEDADES, PLANTA Y EQUIPO EN PROCESO</field>
+      <field name="mayor" eval="True"/>
+    </record>
+    <record id="126" model="account.views">
+      <field name="code">126</field>
+      <field name="sequence">126</field>
+      <field name="parent_id" ref="12" />
+      <field name="name">INTANGIBLES</field>
+      <field name="mayor" eval="True"/>
+    </record>
+    <!-- Pendiente Pasivo 3 nivel-->
+  </data>
+</odoo>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <template id="journal_mayor_doc">
+      <t t-if="doc and 'company_id' in doc">
+        <t t-set="company" t-value="doc.company_id.sudo()"/>
+      </t>
+      <t t-if="not doc or not 'company_id' in doc">
+        <t t-set="company" t-value="res_company"/>
+      </t>
+      <div class="header">
+        <div class="row">
+          <div class="col-xs-3 text-center">
+            <div class="row">
+              <img t-if="company.logo"
+                   t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
+                   style="width:120px;"/>
+            </div>
+          </div>
+          
+          <div class="col-xs-6 text-center">
+            <div class="row">
+              <b><h3 t-field="doc.company_id.name"/></b>
+            </div>
+            <div class="row">
+              Numero de Registro:
+              <b>
+                <span t-field="doc.company_id.nrc"/>
+              </b>
+            </div>
+            <div class="row">
+              Numero de Identificacion Tributario:
+              <b>
+                <span t-field="doc.company_id.nit"/>
+              </b>
+            </div>
+          </div>
+          
+          <div class="col-xs-3 text-center">
+            <div class="row">
+              <ul class="list-inline">
+                <li>Página:</li>
+                <li><span class="page article"/></li>
+                <li>/</li>
+                <li><span class="topage"/></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="row zero_min_height">
+          <div class="col-xs-12">
+            <div style="border-bottom: 1px solid black;"/>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-4">
+            <b>
+              DIARIO MAYOR
+            </b>
+          </div>
+          <div class="col-xs-4">
+            Fecha Final:
+            <b>
+              <span t-field="doc.date_stop" t-field-options='{"format": "d MMMM y"}'/>
+            </b>
+            <br />
+            Mes:
+            <b>
+              <span t-field="doc.mes"/>
+            </b>            
+          </div>
+          <div class="col-xs-4">
+            <b>Expresado en Dolares Americanos</b>            
+          </div>
+        </div>
+      </div>
+      <div class="page article">
+        <style>
+            span{
+              font-size: 12px !important;            
+            }
+            table{
+              border-collapse: collapse !important;
+              width: 100%;
+              }
+            table th, table td{
+              padding: 2px; /* Apply cell padding */
+            }
+            table th {
+              vertical-align: middle !important;
+            }
+            th{
+              font-size: x-small !important;
+              border-top: 1px solid gray;
+              border-bottom: 1px solid gray;
+            }
+            td{
+              border-left: 1px solid gray !important;
+              border-bottom: 0.5px solid  #C899AD ! important;
+              border-bottom-style: dashed;
+              border-right: 1px solid gray !important;
+            }
+        </style>
+        <t t-set='inicial' t-value='True'/>
+        <t t-foreach="doc.get_data()" t-as="data">
+          <div class="row bg-gray border-primary">
+            Día:
+            <b>
+              <span t-esc="tuple(data.keys())[0]"/>
+            </b>
+          </div>
+          <t t-set="debit_t" t-value="0"/>
+          <t t-set="credit_t" t-value="0"/>
+          <div class="row" t-foreach="data.values()" t-as="l_data">
+            <table>
+              <thead>
+                <tr>
+                  <th class="text-center" style="width:10%">
+                    Codigo
+                  </th>
+                  <th class="text-center" style="width:50%">
+                    Nombre
+                  </th>
+                  <th class="text-center" style="width:10%">
+                    Saldo Inicial
+                  </th>
+                  <th class="text-center" style="width:10%">
+                    Cargos
+                  </th>
+                  <th class="text-center" style="width:10%">
+                    Abonos
+                  </th>
+                  <th class="text-center" style="width:10%">
+                    Saldo Final
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr t-foreach="l_data" t-as="line">
+                  <td>
+                    <span t-esc="line.get('code')"/>
+                  </td>
+                  <td>
+                    <span t-esc="line.get('name')"/>
+                  </td>
+                  <td class="text-right">
+                    <span t-esc="doc.convert_balance(line.get('code'), line.get('balance_old'))"
+                          t-options="{'widget': 'monetary', 'display_currency': doc.company_id.currency_id}"/>
+                  </td>
+                  <td class="text-right">
+                    <span t-esc="line.get('debit')"
+                          t-options="{'widget': 'monetary', 'display_currency': doc.company_id.currency_id}" />
+                    <t t-set="debit_t" t-value="debit_t + line.get('debit')"/>
+                  </td>
+                  <td class="text-right">
+                    <span t-esc="line.get('credit')"
+                          t-options="{'widget': 'monetary', 'display_currency': doc.company_id.currency_id}" />
+                    <t t-set="credit_t" t-value="credit_t + line.get('credit')"/>
+                  </td>
+                  <td class="text-right">
+                    <span t-esc="doc.convert_balance(line.get('code'), line.get('balance'))"
+                          t-options="{'widget': 'monetary', 'display_currency': doc.company_id.currency_id}" />
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center" colspan="3">
+                    <span>
+                      Totales
+                    </span>
+                  </td>
+                  <td class="text-right">
+                    <span t-esc="debit_t"
+                          t-options="{'widget': 'monetary', 'display_currency': doc.company_id.currency_id}" />
+                  </td>
+                  <td class="text-right">
+                    <span t-esc="credit_t"
+                          t-options="{'widget': 'monetary', 'display_currency': doc.company_id.currency_id}" />
+                  </td>
+                  <td>
+                    <span />
+                  </td>
+                </tr>
+                <t t-set='inicial' t-value='False'/>
+              </tbody>
+            </table>
+          </div>
+        </t>
+      </div>
+      <div class="footer">
+      </div>
+    </template>
+    <template id="journal_mayor">
+      <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+          <t t-call="contabilidad.journal_mayor_doc"/>
+        </t>
+      </t>
+    </template>    
+  </data>
+</odoo>

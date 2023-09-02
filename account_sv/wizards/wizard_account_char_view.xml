@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="wizard_account_chart_form_view">
+        <field name="name">wizard account chart form view</field>
+        <field name="model">account.chart.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Plan Contable">
+                <p>Marque esta Opcion si desea visualizarlas.</p>
+                <div class="oe_button_box" name="button_box">
+                  <button name="clean_accounts" type="object" class="oe_button    oe_edit_only" icon="fa-check-circle" string="Limpiar Cuentas">
+                  </button>
+                </div>
+                <group>
+                    <group col="2">
+                      <field name="display_report"/>
+                      <field name="date_start"
+                             attrs="{'invisible': [('display_report','=', 'bg')]}"/>
+                      <field name="date_stop"/>
+                    </group>
+                    <group col="2">
+                      <field name="debit_credit"/>
+                      <field name="display_account"/>
+                      <field name="move_draft"/>
+                    </group>
+                </group>
+                <notebook>
+                  <page string="Cuentas">
+                    <field name="account_views_ids" nolabel="1"/>
+                  </page>
+                </notebook>
+                <footer>
+                  <button name="print_report" type="object"
+                      string="Imprimir" class="oe_highlight"/>
+                  or
+                  <button special="cancel" string="Cancelar"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <act_window id="action_wizard_account_chart"
+          name="Plan Contable"
+          res_model="account.chart.wizard"
+          view_mode="form"
+          target="new"
+          key2="client_action_multi"/>
+    
+    <menuitem id="menu_wizard_account_chart"
+          sequence="-2"
+          name="Plan Contable"
+          parent="account_reports.account_reports_partners_reports_menu"
+          groups="account.group_account_manager"
+          action="action_wizard_account_chart"/>
+  </data>
+</odoo>

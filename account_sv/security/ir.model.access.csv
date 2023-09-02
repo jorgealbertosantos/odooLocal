@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+user_acc_views,user_acc_views,model_account_views,account.group_account_invoice,1,0,0,0
+manager_acc_views,manager_acc_views,model_account_views,account.group_account_manager,1,1,1,0
+
