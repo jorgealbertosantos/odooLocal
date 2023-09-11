@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <template id="account_chart_doc">
+      <t t-if="doc and 'company_id' in doc">
+        <t t-set="company" t-value="doc.company_id.sudo()"/>
+      </t>
+      <t t-if="not doc or not 'company_id' in doc">
+        <t t-set="company" t-value="res_company"/>
+      </t>
+      <div class="header">
+        <div class="row">
+          <div class="col-xs-3 text-center">
+            <div class="row">
+              <img t-if="company.logo"
+                   t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
+                   style="width:120px;"/>
+            </div>
+          </div>
+          
+          <div class="col-xs-6 text-center">
+            <div class="row">
+              <b><h3 t-field="doc.company_id.name"/></b>
+            </div>
+            <div class="row">
+              Numero de Registro:
+              <b>
+                <span t-field="doc.company_id.nrc"/>
+              </b>
+            </div>
+            <div class="row">
+              Numero de Identificacion Tributario:
+              <b>
+                <span t-field="doc.company_id.nit"/>
+              </b>
+            </div>
+          </div>
+          
+          <div class="col-xs-3 text-center">
+            <div class="row">
+              <ul class="list-inline">
+                <li>Página:</li>
+                <li><span class="page article"/></li>
+                <li>/</li>
+                <li><span class="topage"/></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="row zero_min_height">
+          <div class="col-xs-12">
+            <div style="border-bottom: 1px solid black;"/>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-4">
+            <b>PLAN CONTABLE
+            <br t-if="doc.display_account != 'all'">
+              <span t-field="doc.display_account" />
+            </br>
+            </b>
+          </div>
+          <div class="col-xs-4">
+            <t t-if="doc.display_report != 'bg'">
+                Fecha Inicial:
+              <b>
+                <span t-field="doc.date_start" t-field-options='{"format": "d MMMM y"}'/>
+              </b>
+              <br />
+            </t>
+            Fecha Final
+            <b>
+              <span t-field="doc.date_stop" t-field-options='{"format": "d MMMM y"}'/>
+            </b>
+          </div>
+          <div class="col-xs-4">
+            <span t-if="doc.move_draft == True">
+              <b>Mostrando Asientos No Asentados </b><br />
+            </span>
+            <b>Expresado en Dolares Americanos</b>
+            
+          </div>
+          
+        </div>
+      </div>
+      <div class="page article">
+        <style>
+            span{
+              font-size: 12px !important;            
+            }
+            table{
+              border-collapse: collapse !important;
+              width: 100%;
+              }
+            table th, table td{
+              padding: 2px; /* Apply cell padding */
+            }
+            table th {
+              vertical-align: middle !important;
+            }
+            th{
+              font-size: x-small !important;
+              border-top: 1px solid gray;
+              border-bottom: 1px solid gray;
+            }
+            td{
+              border-left: 1px solid gray !important;
+              border-bottom: 0.5px solid  #C899AD ! important;
+              border-bottom-style: dashed;
+              border-right: 1px solid gray !important;
+            }
+        </style>
+        <div class="row">
+          <table>
+            <thead>
+              <tr>
+                <th class="text-center" style="width:10%">
+                  Codigo
+                </th>
+                <th class="text-center" style="width:75%" t-if="not doc.debit_credit">
+                  Nombre
+                </th>
+                <th class="text-center" style="width:60%" t-if="doc.debit_credit">
+                  Nombre
+                </th>
+                <th class="text-center" style="width:10%" t-if="doc.debit_credit">
+                  Cargos
+                </th>
+                <th class="text-center" style="width:10%" t-if="doc.debit_credit">
+                  Abonos
+                </th>
+                <th class="text-center" style="width:10%">
+                  Saldo
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr t-foreach="doc.get_accounts()" t-as="account">
+                <td>
+                  <span t-esc="account.get('code')"/>
+                </td>
+                <td>
+                  <span t-esc="account.get('name')"/>
+                </td>
+                <td t-if="doc.debit_credit" class="text-right">
+                  <span t-esc="account.get('debit')"
+                        t-options="{'widget': 'monetary', 'display_currency': doc.company_id.currency_id}"/>
+                </td>
+                <td t-if="doc.debit_credit" class="text-right">
+                  <span t-esc="account.get('credit')"
+                        t-options="{'widget': 'monetary', 'display_currency': doc.company_id.currency_id}" />
+                </td>
+                <td class="text-right">
+                  <span t-esc="account.get('balance')"
+                        t-options="{'widget': 'monetary', 'display_currency': doc.company_id.currency_id}" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="footer">
+      </div>
+    </template>
+    <template id="account_chart">
+      <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+          <t t-call="contabilidad.account_chart_doc"/>
+        </t>
+      </t>
+    </template>    
+  </data>
+</odoo>

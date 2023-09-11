@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+     <record id="account_views_tree" model="ir.ui.view">
+        <field name="name">account.views.tree</field>
+        <field name="model">account.views</field>
+        <field name="arch" type="xml">
+            <tree string="Cuentas de Mayor"
+                  decoration-primary="primary"
+                  decoration-success="success"
+                  decoration-warning="warning">
+                <field name="sequence" widget="handle"/>
+                <field name="display_name" />
+                <field name="parent_id"/>
+                <field name="primary" invisible="1"/>
+                <field name="success" invisible="1"/>
+                <field name="warning" invisible="1"/>
+            </tree>
+        </field>
+      </record>
+     
+      <record id="account_views_form" model="ir.ui.view">
+            <field name="name">account.views.form</field>
+            <field name="model">account.views</field>
+            <field name="arch" type="xml">
+                <form string="Cuentas de Mayor">
+                    <header>
+                    </header>
+                    <sheet string="Cuentas de Mayor">
+                      <div class="oe_button_box" name="button_box"
+                           groups="" >
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                          <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                        <button name="clean_accounts" type="object" class="oe_button oe_edit_only" icon="fa-check-circle" string="Limpiar Cuentas">
+                        </button>
+
+                      </div>
+                      <group>
+                        <group col="2">
+                            <field name="code" />
+                            <field name="name"/>
+                            <field name="mayor" invisible="True"/>
+                        </group>
+                        <group col="2">
+                            <field name="level" invisible="True"/>
+                            <field name="diario_mayor" invisible="True"/>
+                            <field name="cuenta_mayor" attrs="{'invisible': [('level','in',[1,2,3])]}"/>
+                            <field name="parent_id"/>
+                            
+                        </group>
+                      </group>
+                        <notebook attrs="{'invisible': [('mayor','=', True)]}">
+                            <page string="Cuentas de Apuntes">
+                                <field name="account_ids" nolabel="True" domain="[('code','ilike', code+'%')]" widget="one2many">
+                                  <tree editable="bottom" default_order="code,name">
+                                    <field name="code"/>
+                                    <field name="name"/>
+                                  </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+      </record>
+      
+      <record id="action_acc_views" model="ir.actions.act_window">
+            <field name="name">Cuentas de Mayor</field>
+            <field name="res_model">account.views</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="account_views_tree"/>
+        </record>
+        <menuitem id="acc_views_menu"
+                  sequence="-2"
+                  name="Cuentas de Mayor"
+                  parent="account.account_account_menu"
+                  groups="account.group_account_manager"
+                  action="action_acc_views"/>
+  </data>
+</odoo>
