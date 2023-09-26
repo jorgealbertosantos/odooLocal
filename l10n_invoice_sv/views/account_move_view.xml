@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_invoice_form_sv" model="ir.ui.view">
+            <field name="name">Invoice Sv</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                    <xpath expr="//field[@name='narration']" position="before">
+                        <field class="oe_left" name="amount_text" placeholder="amount to text"/>
+                    </xpath>
+                    <xpath expr="//field[@name='journal_id']" position="after">
+                        <field name="inv_refund_id"
+                                attrs="{'invisible': [('type', 'not in', ('out_invoice', 'out_refund', 'out_receipt'))]}"
+                                readonly="True" />
+                    </xpath>
+                    <xpath expr="//field[@name='state']" position="replace">
+                        <field name="state" attrs="{'invisible':[('state_refund','=','refund')]}" widget="statusbar" statusbar_visible="draft,posted"/>
+                        <field name="state_refund" attrs="{'invisible':[('state_refund','!=','refund')]}" statusbar_visible="refund" widget="statusbar" nolabel="1"/>
+                    </xpath>               
+            </field>
+        </record>
+        <record id="view_invoice_sv_tree" model="ir.ui.view">
+            <field name="name">Invoice Refund</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+                    <xpath expr="//field[@name='state']" position="after">
+                        <field name="state_refund" optional="show"/>
+                    </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
