@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="l10n_sv.1_tax1" model="account.tax">
+            <field name="type_tax">iva_venta</field>
+        </record>
+        <record id="l10n_sv.1_tax2" model="account.tax">
+            <field name="type_tax">exento</field>
+        </record>
+        <record id="l10n_sv.1_tax3" model="account.tax">
+            <field name="type_tax">exportacion</field>
+        </record>
+        <record id="l10n_sv.1_tax4" model="account.tax">
+            <field name="type_tax">no_sujeto</field>
+        </record>
+        <record id="l10n_sv.1_tax5" model="account.tax">
+            <field name="type_tax">iva_compra</field>
+        </record>
+        <record id="l10n_sv.1_tax6" model="account.tax">
+            <field name="type_tax">percepcion1</field>
+        </record>
+        <record id="l10n_sv.1_tax7" model="account.tax">
+            <field name="type_tax">percepcion2</field>
+        </record>
+        <record id="l10n_sv.1_tax8" model="account.tax">
+            <field name="type_tax">importacionG</field>
+        </record>
+        <record id="l10n_sv.1_tax9" model="account.tax">
+            <field name="type_tax">exento</field>
+        </record>
+        <record id="l10n_sv.1_tax10" model="account.tax">
+            <field name="type_tax">na</field>
+        </record>
+        <record id="l10n_sv.1_tax11" model="account.tax">
+            <field name="type_tax">na</field>
+        </record>
+        <record id="l10n_sv.1_tax12" model="account.tax">
+            <field name="type_tax">importacionE</field>
+        </record>
+        <record id="l10n_sv.1_tax13" model="account.tax">
+            <field name="type_tax">no_sujeto</field>
+        </record>
+        <record id="l10n_sv.1_tax14" model="account.tax">
+            <field name="type_tax">retencion</field>
+        </record>
+    </data>
+</odoo>

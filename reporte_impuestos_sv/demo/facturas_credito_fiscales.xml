@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Facturas Normales -->
+    <record model="account.move" id="ccf1">
+        <field name="partner_id" ref="base.res_partner_12"/>
+        <field name="ref">PV0001</field>
+        <field name="invoice_payment_term_id" ref="account.account_payment_term_end_following_month"/>
+        <field name="invoice_date" eval="time.strftime('%Y-%m')+'-01'"/>
+        <field name="journal_id" search="[('name','=','Comprobante Credito Fiscal')]"/>
+        <field name="type">out_invoice</field>
+        <field name="invoice_user_id" ref="base.user_demo"/>
+        <field name="invoice_line_ids" eval="[
+              (0, 0,
+                {'product_id': ref('product.product_product_2'),
+                'price_unit': 642.0,
+                'quantity': 1,
+                'tax_ids': [(4, ref('l10n_sv.1_tax1'), 0)]
+                }),
+            ]"/>
+    </record>
+
+    <record model="account.move" id="ccf2">
+        <field name="partner_id" ref="base.res_partner_12"/>
+        <field name="ref">PV0002</field>
+        <field name="invoice_payment_term_id" ref="account.account_payment_term_end_following_month"/>
+        <field name="invoice_date" eval="time.strftime('%Y-%m')+'-02'"/>
+        <field name="journal_id" search="[('name','=','Comprobante Credito Fiscal')]"/>
+        <field name="type">out_invoice</field>
+        <field name="invoice_user_id" ref="base.user_demo"/>
+        <field name="invoice_line_ids" eval="[
+              (0, 0,
+                {'product_id': ref('product.product_product_2'),
+                'price_unit': 642.0,
+                'quantity': 2,
+                'tax_ids': [(4, ref('l10n_sv.1_tax1'), 0)]
+                }),
+            ]"/>
+    </record>
+    <!-- Facturas Rectificativas -->
+    <record model="account.move" id="ccf2_rect">
+        <field name="partner_id" ref="base.res_partner_12"/>
+        <field name="ref">PV0002</field>
+        <field name="invoice_payment_term_id" ref="account.account_payment_term_end_following_month"/>
+        <field name="invoice_date" eval="time.strftime('%Y-%m')+'-02'"/>
+        <field name="journal_id" search="[('name','=','Nota de Credito')]"/>
+        <field name="type">out_refund</field>
+        <field name="inv_refund_id" ref="ccf2"/>
+        <field name="invoice_user_id" ref="base.user_demo"/>
+        <field name="invoice_line_ids" eval="[
+              (0, 0,
+                {'product_id': ref('product.product_product_2'),
+                'price_unit': 642.0,
+                'quantity': 2,
+                'tax_ids': [(4, ref('l10n_sv.1_tax1'), 0)]
+                }),
+            ]"/>
+    </record>
+    <record model="account.move" id="ccf2">
+        <field name="inv_refund_id" ref="ccf2_rect"/>
+    </record>
+
+</odoo>

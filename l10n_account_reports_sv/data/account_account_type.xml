@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="desc_dev_ventas" model="account.account.type">
+            <field name="name">Descuentos y devoluciones sobre venta de productos</field>
+            <field name="type">other</field>
+            <field name="internal_group">income</field>
+            <field name="include_initial_balance" eval="False"/>
+            <field name="note"></field>
+        </record>
+        <record id="desc_dev_ventas" model="account.account.type">
+            <field name="name">Gastos por intereses</field>
+            <field name="type">other</field>
+            <field name="internal_group">income</field>
+            <field name="include_initial_balance" eval="False"/>
+            <field name="note"></field>
+        </record>
+    </data>
+</odoo>
